@@ -11,6 +11,6 @@
                         ID3_______________________________________________Code: id3.py Dataset: id3.csv
                         ANN_______________________________________________Code: ann.py
                         Bayesian classifier_______________________________Code:NaiveBayes.py
-                        EM algorithm
+                        EM algorithm______________________________________Code:kmeans.py
                         kNN_______________________________________________Code: knn.py
                         Locally weighted regression algorithm_____________Code: regression.py
