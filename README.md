@@ -10,7 +10,7 @@
                         Candidate elimination_____________________________Code: candiate.py Dataset: candidate.csv
                         ID3_______________________________________________Code: id3.py Dataset: id3.csv
                         ANN_______________________________________________Code: ann.py
-                        Bayesian classifier
+                        Bayesian classifier_______________________________Code:NaiveBayes.py
                         EM algorithm
                         kNN_______________________________________________Code: knn.py
                         Locally weighted regression algorithm_____________Code: regression.py
