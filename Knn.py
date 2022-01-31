@@ -1,15 +1,22 @@
-from sklearn.model_selection import train_test_split as tts
-from sklearn.neighbors import KNeighborsClassifier as knc
-from sklearn.metrics import classification_report as cr, confusion_matrix as cm
-from sklearn import datasets as dt
+from sklearn.datasets import load_iris
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import confusion_matrix
+import numpy as np
 
-iris = dt.load_iris()
-data, label = iris.data, iris.target
+dataset=load_iris()
+#print(dataset)
+X_train,X_test,y_train,y_test=train_test_split(dataset["data"],dataset["target"],random_state=0)
 
-xTr, xT, yTr, yT = tts(data, label, test_size=0.30)
-kmc = knc(5)
-kmc.fit(xTr, yTr)
-yPr = kmc.predict(xT)
+kn=KNeighborsClassifier(n_neighbors=1)
+kn.fit(X_train,y_train)
 
-print(cm(yT, yPr))
-print(cr(yT, yPr))
+print("y_pred   y_test")
+
+for i in range(len(X_test)):
+    x=X_test[i]
+    x_new=np.array([x])
+    prediction=kn.predict(x_new)
+    print(y_test[i],"       ",int(prediction))
+
+print("Accuracy of our model is equal:",kn.score(X_test,y_test)*100)
