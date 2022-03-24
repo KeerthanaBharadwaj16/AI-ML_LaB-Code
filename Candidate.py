@@ -1,34 +1,34 @@
-import csv, numpy as np
-from traceback import print_tb
+import csv
+with open("trainingdata.csv") as f:
+    csv_file = csv.reader(f)
+    data = list(csv_file)
+    print(data)
 
-with open("candidate.csv", "r") as file:
-    read = csv.reader(file)
-    list = np.array(list(read))
+    s = data[1][:-1]
+    g = [['?' for i in range(len(s))] for j in range(len(s))]
 
-concept = np.array(list[:,:-1])
-target = np.array(list[:,-1])
+    for i in data:
+        if i[-1] == "Yes":
+            for j in range(len(s)):
+                if i[j] != s[j]:
+                    s[j] = '?'
+                    g[j][j] = '?'
 
-for i in range(len(target)):
-    if(target[i] == "Y"):
-        specific = concept[i]
-        break
+        elif i[-1] == "No":
+            for j in range(len(s)):
+                if i[j] != s[j]:
+                    g[j][j] = s[j]
+                else:
+                    g[j][j] = "?"
+        print("\nSteps of Candidate Elimination Algorithm", data.index(i) + 1)
+        print(s)
+        print(g)
+    gh = []
+    for i in g:
+        for j in i:
+            if j != '?':
+                gh.append(i)
+                break
+    print("\nFinal specific hypothesis:\n", s)
 
-generic = [["?" for i in range(len(specific))] for i in range(len(specific))]
-
-for i in range(len(target)):
-    if(target[i] == "Y"):
-        for j in range(len(specific)):
-            if(specific[j] != concept[i][j]):
-                specific[j] = "?"
-                generic[j][j] = "?"
-
-    else:
-        for j in range(len(specific)):
-            if specific[j] != concept[i][j]:
-                generic[j][j] = specific[j]
-            else:
-                generic[j][j] = "?"
-
-    print("Step {}".format(i+1))
-    print("G{} = {}".format(i, generic))
-    print("S{} = {}".format(i, specific))
+    print("\nFinal general hypothesis:\n", gh)
